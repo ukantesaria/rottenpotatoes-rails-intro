@@ -30,4 +30,4 @@
         %td= movie.release_date
         %td{:class => "badge badge-primary"}= link_to "More about #{movie.title}", movie_path(movie), style: "color:white;"
 
-= button_to 'Add new movie', new_movie_path, class: 'btn btn-primary'
+= link_to 'Add new movie', new_movie_path, class: "badge badge-primary" ,style: "font-size: 150%"
