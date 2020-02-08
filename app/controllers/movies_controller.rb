@@ -19,12 +19,14 @@ class MoviesController < ApplicationController
       ordering,@release_date_header ={:release_date => :asc}, 'hilite'
     end
 
-    @all_ratings = Movie.all_ratings
+    @all_ratings = Movie.rate
     @filtered_ratings = params[:ratings] || session[:ratings] || {}
 
     if @filtered_ratings == {}
       @filtered_ratings = Hash[@all_ratings.map {|rating| [rating, rating]}]
     end
+
+    @movies = Movie.where(rating: @filtered_ratings.keys).order(ordering)
 
     if params[:sort] != session[:sort]
       session[:sort] = params[:sort]
@@ -33,8 +35,6 @@ class MoviesController < ApplicationController
     if params[:ratings] != session[:ratings]
       session[:ratings] = params[:ratings]
     end
-
-    @movies = Movie.where(rating: @filtered_ratings.keys).order(ordering)
     
   end
 
