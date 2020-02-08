@@ -33,7 +33,7 @@ class MoviesController < ApplicationController
     if params[:ratings] != session[:ratings]
       session[:ratings] = params[:ratings]
     end
-    
+
     @movies = Movie.where(rating: @filtered_ratings.keys).order(ordering)
     
   end
